@@ -1,0 +1,12 @@
+Player That Need To Implement
+-----------------------------
+hls (start with this)
+dash
+mux
+youtube
+vimeo
+wista
+spotify
+twitch
+tiktok
+html
