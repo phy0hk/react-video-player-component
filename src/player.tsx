@@ -1,13 +1,11 @@
 import PlayerProvider from "./provider/player-provider";
+import type { VideoProps } from "./types";
 import Video from "./video";
 
-const Player = () => {
+const Player = (props: VideoProps) => {
     return (
         <PlayerProvider>
-            <Video
-                src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
-                controls
-            />
+            <Video {...props} />
         </PlayerProvider>
     );
 };
