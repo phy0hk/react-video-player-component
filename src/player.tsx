@@ -1,3 +1,4 @@
+import AnimationProvider from "./provider/animation-provider";
 import PlayerProvider from "./provider/player-provider";
 import type { VideoProps } from "./types";
 import Video from "./video";
@@ -5,7 +6,9 @@ import Video from "./video";
 const Player = (props: VideoProps) => {
     return (
         <PlayerProvider>
-            <Video {...props} />
+            <AnimationProvider>
+                <Video {...props} />
+            </AnimationProvider>
         </PlayerProvider>
     );
 };
