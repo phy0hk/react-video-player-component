@@ -7,7 +7,7 @@ const FloatingControl = () => {
     const { playerStates, Play } = usePlayer();
     const { handleMouseMove, handleOnTouch } = useAnimation();
     const PlayPauseIconStyles =
-        "hover:bg-zinc-500/60 active:bg-zinc-500/60 rounded-full size-14 max-md:size-10 max-sm:size-8 p-1";
+        "hover:bg-zinc-500/60 active:bg-zinc-500/60 rounded-full size-14 max-md:size-10 max-sm:size-8 p-2";
     return (
         <div className="h-full w-full flex flex-col items-center text-white">
             {/* Play Button */}

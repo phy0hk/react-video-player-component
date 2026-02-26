@@ -1,10 +1,4 @@
-import {
-    useCallback,
-    useEffect,
-    useRef,
-    useState,
-    type ReactNode,
-} from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import PlayerContext from "../context/player-context";
 // import axios from "axios";
 // import { BasicVideoFormat } from "../contants/video-formats";
@@ -12,8 +6,12 @@ import type { PlayerStatesT } from "../types";
 
 const PlayerProvider = ({ children }: { children: ReactNode }) => {
     const [VideoRef, setVideoRef] = useState<HTMLVideoElement>();
-    const VideoContainerRef = useRef<HTMLDivElement>(null);
-    const ControllerDockRef = useRef<HTMLDivElement>(null);
+    // const VideoContainerRef = useRef<HTMLDivElement>(null);
+    const [VideoContainerRef, setVideoContainerRef] =
+        useState<HTMLDivElement>();
+    // const ControllerDockRef = useRef<HTMLDivElement>(null);
+    const [ControllerDockRef, setControllerDockRef] =
+        useState<HTMLDivElement>();
     // const [src, setSrc] = useState<string>("");
     const [playerStates, setPlayerStates] = useState<PlayerStatesT>({
         paused: true,
@@ -33,7 +31,12 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
     const createVideoRef = useCallback((e: HTMLVideoElement) => {
         setVideoRef(e);
     }, []);
-
+    const createVideoContainerRef = useCallback((e: HTMLDivElement) => {
+        setVideoContainerRef(e);
+    }, []);
+    const createControllerDockRef = useCallback((e: HTMLDivElement) => {
+        setControllerDockRef(e);
+    }, []);
     function Play() {
         if (!VideoRef) return;
         setPlayerStates((prev) => ({ ...prev, paused: false }));
@@ -45,34 +48,37 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
         if (!VideoRef.paused) VideoRef.pause();
     }
     function Fullscreen() {
-        if (!VideoRef) return;
-        VideoContainerRef.current?.requestFullscreen();
+        if (!VideoContainerRef) return;
+        VideoContainerRef.requestFullscreen();
     }
     function ExitFullscreen() {
         document.exitFullscreen();
     }
-
     useEffect(() => {
-        const detectFullscreenChange = () => {
+        if (!VideoContainerRef) return;
+        const handleFullscreenChange = () => {
+            console.log("GG");
             setPlayerStates((prev) => ({
                 ...prev,
-                isInFullscreen: document.fullscreenElement === VideoRef,
+                isInFullscreen:
+                    document.fullscreenElement === VideoContainerRef,
             }));
         };
-        document.addEventListener("fullscreenchange", detectFullscreenChange);
-
+        document.addEventListener("fullscreenchange", handleFullscreenChange);
         return () =>
             document.removeEventListener(
-                "fullscreenchange",
-                detectFullscreenChange,
+                "fllscreenchange",
+                handleFullscreenChange,
             );
-    }, []);
+    }, [VideoContainerRef]);
 
     return (
         <PlayerContext.Provider
             value={{
                 VideoRef,
                 createVideoRef,
+                createVideoContainerRef,
+                createControllerDockRef,
                 VideoContainerRef,
                 ControllerDockRef,
                 playerStates,

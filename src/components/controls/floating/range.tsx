@@ -5,9 +5,11 @@ export interface RangeProps {
 }
 const Range = ({ progressPercent, className, onChange }: RangeProps) => {
     return (
-        <div className={`flex items-center justify-center group ${className}`}>
+        <div
+            className={`flex items-center justify-center group px-2 ${className}`}
+        >
             <div
-                className={`border border-zinc-300 rounded-full w-full h-1/4 relative flex flex-row items-center `}
+                className={`border border-zinc-300 rounded-full w-full h-1/4 relative flex flex-row items-center`}
             >
                 <div
                     className="h-full bg-blue-500 transition-all delay-0 duration-100 ease-in-out rounded-full"

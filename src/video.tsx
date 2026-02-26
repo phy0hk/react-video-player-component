@@ -10,12 +10,13 @@ const VideoPlayer = ({
     controls,
     controlType = "default",
 }: VideoProps) => {
-    const { createVideoRef, VideoContainerRef, Pause, Play } = usePlayer();
+    const { createVideoRef, createVideoContainerRef, Pause, Play } =
+        usePlayer();
     const { handleOnKeyDown } = usePlayerEvents();
     return (
         <div
             className={`relative bg-black ${className}`}
-            ref={VideoContainerRef}
+            ref={createVideoContainerRef}
         >
             <ReactPlayer
                 ref={createVideoRef}

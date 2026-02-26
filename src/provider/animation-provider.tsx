@@ -36,7 +36,7 @@ const AnimationProvider = ({ children }: { children: ReactNode }) => {
     const handleOnTouch = () => {
         timer.restart();
     };
-    const animateProgressBar = () => {};
+    // const animateProgressBar = () => {};
     return (
         <AnimationContext.Provider
             value={{
